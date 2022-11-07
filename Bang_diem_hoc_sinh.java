@@ -16,9 +16,10 @@ import java.util.*;
 class Bang_diem implements Comparable<Bang_diem>{
    private String ma;
    private String ten;
-   private float x1,x2,x3,x4,x5,x6,x7,x8,x9,x10;
+   private double x1,x2,x3,x4,x5,x6,x7,x8,x9,x10;
    private static int cnt =1;
-    public Bang_diem( String ten, float x1, float x2, float x3, float x4, float x5, float x6, float x7, float x8, float x9, float x10) {
+
+    public Bang_diem(String ten, double x1, double x2, double x3, double x4, double x5, double x6, double x7, double x8, double x9, double x10) {
         this.ma = String.format("HS%02d", cnt++);
         this.ten = ten;
         this.x1 = x1;
@@ -32,32 +33,25 @@ class Bang_diem implements Comparable<Bang_diem>{
         this.x9 = x9;
         this.x10 = x10;
     }
-   private float diem_tb(){
-       float sum = (float)(this.x1*2 +this.x2*2+this.x3+this.x4+this.x5+this.x6+this.x7+this.x8+this.x9+this.x10);
-       sum = (float)sum/12;
-       sum = (float) (Math.round(sum*10.0) / 10.0);
+   
+   private double diem_tb(){
+       double sum = (double)(this.x1*2 +this.x2*2+this.x3+this.x4+this.x5+this.x6+this.x7+this.x8+this.x9+this.x10);
+       sum = (double)sum/12;
+       sum = (double)(Math.round(sum*10.0)) / 10;
        return sum;
    }
-//   private String chuan_hoa_diem_tb(){
-//       String s = this.diem_tb() +"";
-//       if(s.charAt(s.length() - 1) == '0' && s.charAt(s.length()-2) == '.'){
-//           s=s.substring(0,s.length()-2);
-//       }
-//       return s;
-//   }
    private String xep_hang(){
-       float z = this.diem_tb();
-       System.out.println(z);
+       double z = this.diem_tb();
        if(z >= 9){
            return "XUAT SAC";
        }
-       if(z >= 8 && z <= 8.9){
+       else if(z >= 8){
            return "GIOI";
        }
-       if(z >= 7 && z <= 7.9){
+       else if(z >= 7 ){
            return "KHA";
        }
-       if(z >= 5 && z <= 6.9){
+       else if(z >= 5){
            return "TB";
        }
        else return "YEU";
@@ -68,12 +62,10 @@ class Bang_diem implements Comparable<Bang_diem>{
     }
    @Override
    public int compareTo(Bang_diem o){
-       float a = (float) (Math.round(this.diem_tb()*10.0) / 10.0);
-       float b = (float) (Math.round(o.diem_tb()*10.0) / 10.0);
-       if(a < b){
+       if(this.diem_tb() < o.diem_tb()){
            return 1;
        }
-       if(a==b && this.ma.compareTo(o.ma) > 0){
+       if(this.diem_tb() == o.diem_tb() && this.ma.compareTo(o.ma) > 0){
            return 1;
        }
        return -1;
@@ -85,8 +77,8 @@ public class Bang_diem_hoc_sinh {
         int n =Integer.parseInt(sc.nextLine());
         ArrayList <Bang_diem> ds = new ArrayList<Bang_diem>();
         for(int i=0;i<n;i++){
-            Bang_diem sv = new Bang_diem(sc.nextLine(),sc.nextFloat(),sc.nextFloat(),sc.nextFloat(),sc.nextFloat(),sc.nextFloat(),sc.nextFloat(),
-            sc.nextFloat(),sc.nextFloat(),sc.nextFloat(),sc.nextFloat());
+            Bang_diem sv = new Bang_diem(sc.nextLine(),sc.nextDouble(),sc.nextDouble(),sc.nextDouble(),sc.nextDouble(),sc.nextDouble(),sc.nextDouble(),
+            sc.nextDouble(),sc.nextDouble(),sc.nextDouble(),sc.nextDouble());
             sc.nextLine();
             ds.add(sv);
         }
